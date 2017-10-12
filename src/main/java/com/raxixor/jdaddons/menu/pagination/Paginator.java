@@ -64,13 +64,13 @@ public class Paginator extends Menu {
     }
     
     public void paginate(MessageChannel channel, int pageNum) {
-        pageNum = (pageNum < 1) ? ((pageNum > pages) ? pages : 1) : 1;
+        pageNum = (pageNum < 1) ? 1 : ((pageNum > pages) ? pages : pageNum);
         Message msg = renderPage(pageNum);
         initialize(channel.sendMessage(msg), pageNum);
     }
     
     public void paginate(Message message, int pageNum) {
-        pageNum = (pageNum < 1) ? ((pageNum > pages) ? pages : 1) : 1;
+        pageNum = (pageNum < 1) ? 1 : ((pageNum > pages) ? pages : pageNum);
         Message msg = renderPage(pageNum);
         initialize(message.editMessage(msg), pageNum);
     }
