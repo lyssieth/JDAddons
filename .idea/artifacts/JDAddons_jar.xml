@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="JDAddons:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/JDAddons_jar</output-path>
+    <root id="archive" name="main.jar">
+      <element id="module-output" name="main" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/deps/commons-text-1.1-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/deps/commons-text-1.1-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/deps/commons-text-1.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
