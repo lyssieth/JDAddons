@@ -104,40 +104,38 @@ public class Paginator extends Menu {
             }
             try { event.getReaction().removeReaction(event.getUser()).queue(); } catch(PermissionException ignored) {}
             int n = newPageNum;
-            message.editMessage(renderPage(newPageNum)).queue(m ->{
-                pagination(m, n);
-            });
+            message.editMessage(renderPage(newPageNum)).queue(m -> pagination(m, n));
         }, timeout, unit, () -> finalAction.accept(message));
     }
     
     private Message renderPage(int pageNum) {
-        MessageBuilder mbuilder = new MessageBuilder();
-        EmbedBuilder ebuilder = new EmbedBuilder();
+        MessageBuilder mBuilder = new MessageBuilder();
+        EmbedBuilder eBuilder = new EmbedBuilder();
         int start = (pageNum - 1) * itemsPerPage;
         int end = strings.size() < pageNum * itemsPerPage ? strings.size() : pageNum * itemsPerPage;
         switch (columns) {
             case 1:
-                StringBuilder sbuilder = new StringBuilder();
+                StringBuilder sBuilder = new StringBuilder();
                 for (int i = start; i < end; i++)
-                    sbuilder.append("\n").append(numberItems ? "`" + (i + 1) + ".` " : "").append(strings.get(i));
-                ebuilder.setDescription(sbuilder.toString());
+                    sBuilder.append("\n").append(numberItems ? "`" + (i + 1) + ".` " : "").append(strings.get(i));
+                eBuilder.setDescription(sBuilder.toString());
                 break;
             default:
                 int per = (int) Math.ceil((double) (end - start) / columns);
                 for (int k = 0; k < columns; k++) {
-                    StringBuilder strbuilder = new StringBuilder();
+                    StringBuilder strBuilder = new StringBuilder();
                     for (int i = start + k * per; i < end && i < start + (k + 1) * per; i++)
-                        strbuilder.append("\n").append(numberItems ? "`" + (i + 1) + ".` " : "").append(strings.get(i));
-                    ebuilder.addField("", strbuilder.toString(), true);
+                        strBuilder.append("\n").append(numberItems ? "`" + (i + 1) + ".` " : "").append(strings.get(i));
+                    eBuilder.addField("", strBuilder.toString(), true);
                 }
         }
-        
-        ebuilder.setColor(color.apply(pageNum, pages));
+    
+        eBuilder.setColor(color.apply(pageNum, pages));
         if (showPageNumbers)
-            ebuilder.setFooter("Page " + pageNum + "/" + pages, null);
-        mbuilder.setEmbed(ebuilder.build());
+            eBuilder.setFooter("Page " + pageNum + "/" + pages, null);
+        mBuilder.setEmbed(eBuilder.build());
         if (text != null)
-            mbuilder.append(text.apply(pageNum, pages));
-        return mbuilder.build();
+            mBuilder.append(text.apply(pageNum, pages));
+        return mBuilder.build();
     }
 }

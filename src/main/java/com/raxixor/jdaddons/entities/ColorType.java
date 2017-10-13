@@ -5,7 +5,7 @@ public enum ColorType {
     RGB(1),
     RGBA(2);
     
-    private int type;
+    private final int type;
     ColorType(int type) {
         this.type = type;
     }

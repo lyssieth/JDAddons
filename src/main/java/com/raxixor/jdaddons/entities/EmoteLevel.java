@@ -8,7 +8,7 @@ public enum EmoteLevel {
     ERROR(2),
     FATAL(3);
     
-    private int value;
+    private final int value;
     EmoteLevel(int value) {
         this.value = value;
     }

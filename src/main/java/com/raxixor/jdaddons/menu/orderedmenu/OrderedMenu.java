@@ -124,9 +124,7 @@ public class OrderedMenu extends Menu {
     }
     
     private void waitReactionOnly(Message m) {
-        waiter.waitForEvent(MessageReactionAddEvent.class, e -> {
-            return isValidReaction(m, e);
-        }, e -> {
+        waiter.waitForEvent(MessageReactionAddEvent.class, e -> isValidReaction(m, e), e -> {
             m.delete().queue();
             if (e.getReaction().getEmote().getName().equals(CANCEL))
                 cancel.run();
@@ -171,11 +169,12 @@ public class OrderedMenu extends Menu {
     
     private int getMessageNumber(String message) {
         if (useLetters)
+            //noinspection SpellCheckingInspection
             return message.length() == 1 ? " abcdefghij".indexOf(message.toLowerCase()) : -1;
         else {
             if (message.length() == 1)
                 return " 123456789".indexOf(message);
-            return message.equals(10) ? 10 : -1;
+            return message.equals(10 + "") ? 10 : -1;
         }
     }
 }

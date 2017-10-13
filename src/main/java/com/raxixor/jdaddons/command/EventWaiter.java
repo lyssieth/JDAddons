@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 public class EventWaiter implements EventListener {
     
     private final HashMap<Class<?>, List<WaitingEvent>> waitEvents;
-    private final ScheduledExecutorService threadpool;
+    private final ScheduledExecutorService threadPool;
     
     public EventWaiter() {
         waitEvents = new HashMap<>();
-        threadpool = Executors.newSingleThreadScheduledExecutor();
+        threadPool = Executors.newSingleThreadScheduledExecutor();
     }
     
     public <T extends Event> void waitForEvent(Class<T> classType, Predicate<T> condition, Consumer<T> action) {
@@ -42,7 +42,7 @@ public class EventWaiter implements EventListener {
         WaitingEvent we = new WaitingEvent<>(condition, action);
         list.add(we);
         if (timeout > 0 && unit != null) {
-            threadpool.schedule(() -> {
+            threadPool.schedule(() -> {
                 if (list.remove(we) && timeoutAction != null)
                     timeoutAction.run();
             }, timeout, unit);
@@ -57,11 +57,11 @@ public class EventWaiter implements EventListener {
         while (c.getSuperclass() != null) {
             if (waitEvents.containsKey(c)) {
                 List<WaitingEvent> list = waitEvents.get(c);
-                List<WaitingEvent> ulst = new ArrayList<>(list);
-                list.removeAll(ulst.stream().filter(i -> i.attempt(event)).collect(Collectors.toList()));
+                List<WaitingEvent> uList = new ArrayList<>(list);
+                list.removeAll(uList.stream().filter(i -> i.attempt(event)).collect(Collectors.toList()));
             }
             if (event instanceof ShutdownEvent)
-                threadpool.shutdown();
+                threadPool.shutdown();
             c = c.getSuperclass();
         }
     }

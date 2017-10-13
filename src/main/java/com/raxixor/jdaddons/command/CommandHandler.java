@@ -13,7 +13,7 @@ public class CommandHandler {
     
     private final SimpleLog log = SimpleLog.getLog("CommandHandler");
     
-    private Set<Command> commands = new HashSet<>();
+    private final Set<Command> commands = new HashSet<>();
     
     public void registerCommands(Set<Command> cmds) {
         this.commands.addAll(cmds);

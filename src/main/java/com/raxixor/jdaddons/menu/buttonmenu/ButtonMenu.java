@@ -61,7 +61,7 @@ public class ButtonMenu extends Menu {
                 if (i + 1 < choices.size())
                     r.queue();
                 else
-                    r.queue(v -> {
+                    r.queue(v ->
                         waiter.waitForEvent(MessageReactionAddEvent.class, event -> {
                             if (!event.getMessageId().equals(m.getId()))
                                 return false;
@@ -74,8 +74,8 @@ public class ButtonMenu extends Menu {
                         }, (MessageReactionAddEvent event ) -> {
                             m.delete().queue();
                             action.accept(event.getReaction().getEmote());
-                        }, timeout, unit, cancel);
-                    });
+                        }, timeout, unit, cancel)
+                    );
             }
         });
     }

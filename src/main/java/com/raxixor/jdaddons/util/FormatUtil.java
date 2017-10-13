@@ -17,11 +17,10 @@ import java.util.function.Function;
 public final class FormatUtil {
     
     public static String formatTime(OffsetDateTime time) {
-        if (time == null) return "NULL_TIME";
+        if (time == null) return null;
     
         Function<Integer, String> convert = s -> {
-            if (s <= 9)
-                return "0" + s;
+            if (s <= 9) return "0" + s;
             return "" + s;
         };
     
@@ -39,22 +38,24 @@ public final class FormatUtil {
     }
     
     public static String firstToUpper(String str) {
-        if (str.length() == 1)
-            return str.toUpperCase();
-        if (str.length() > 1)
-            return str.substring(0, 1).toUpperCase()
-                    + str.substring(1);
+        if (str.length() == 1) return str.toUpperCase();
+        if (str.length() > 1) return str.substring(0, 1).toUpperCase() + str.substring(1);
         return null;
     }
     
     public static String formatUser(User usr) {
         if (usr == null) return null;
-        return String.format("%s#%s (%s)", usr.getName(), usr.getDiscriminator(),
-                usr.getId());
+        return String.format("%s#%s (%s)", usr.getName(), usr.getDiscriminator(), usr.getId());
     }
     
     public static String formatUserWildcard(String str, User user, Wildcard wc) {
-        if (user == null) return null;
+        if (user == null || wc == null) return null;
+        return wc.replace(str, formatUser(user));
+    }
+    
+    public static String formatUserWildcard(String str, User user, Wildcard wc, boolean mention) {
+        if (user == null || wc == null) return null;
+        if (!mention) return formatUserWildcard(str, user, wc);
         return wc.replace(str, user.getAsMention());
     }
     
@@ -62,12 +63,17 @@ public final class FormatUtil {
         if (mem == null) return null;
         User usr = mem.getUser();
         return String.format("%s#%s {%s} (%s)", usr.getName(), usr.getDiscriminator(),
-                mem.getNickname() != null ? mem.getNickname() : "No Nickname",
-                usr.getId());
+                mem.getNickname() != null ? mem.getNickname() : "No Nickname", usr.getId());
     }
     
     public static String formatMemberWildcard(String str, Member mem, Wildcard wc) {
-        if (mem == null) return null;
+        if (mem == null || wc == null) return null;
+        return wc.replace(str, formatMember(mem));
+    }
+    
+    public static String formatMemberWildcard(String str, Member mem, Wildcard wc, boolean mention) {
+        if (mem == null || wc == null) return null;
+        if (!mention) return formatMemberWildcard(str, mem, wc);
         return wc.replace(str, mem.getAsMention());
     }
     
@@ -172,13 +178,15 @@ public final class FormatUtil {
     }
     
     public static String formatRegion(Region region) {
-        return (region.isVip() ? "VIP - " : "") + region.getName();
+        return (region.isVip() ? "VIP - " : "") + (region.getName().replace(" (VIP)", ""));
     }
     
-    public static String formatChannel(MessageChannel chan) {
+    public static String formatChannel(MessageChannel chan, boolean mention) {
         switch(chan.getType()) {
             case TEXT:
-                return String.format("#%s (%s)", chan.getName(), chan.getId());
+                TextChannel tChan = (TextChannel) chan;
+                if (mention) return tChan.getAsMention();
+                return String.format("#%s (%s)", tChan.getName(), tChan.getId());
             case VOICE:
                 VoiceChannel vChan = (VoiceChannel) chan;
                 return String.format("%s (%s)", vChan.getName(), vChan.getId());
@@ -194,5 +202,9 @@ public final class FormatUtil {
             default:
                 return null;
         }
+    }
+    
+    public static String formatChannel(MessageChannel chan) {
+        return formatChannel(chan, false);
     }
 }
