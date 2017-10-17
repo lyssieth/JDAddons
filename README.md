@@ -1,5 +1,6 @@
 # JDAddons
-Private addons for [JDA by DV8FromTheWorld](https://github.com/DV8FromTheWorld/JDA)
+Private addons for [JDA by DV8FromTheWorld](https://github.com/DV8FromTheWorld/JDA)  
+Version 1.0
 
 ## Features
 * Completely Undocumented (Likely to change soon)
