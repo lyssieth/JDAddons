@@ -27,7 +27,7 @@ public enum EmoteLevel {
             case 3:
                 return "☠"; // FATAL
             default:
-                return "ℹ";
+                return "ℹ"; // INFO
         }
     }
 }

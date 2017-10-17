@@ -22,6 +22,7 @@ public class TestRunner {
                 log.fatal(fail.getTrace());
                 log.fatal("---------------------");
             }
+            System.exit(1);
         }
     }
 }
