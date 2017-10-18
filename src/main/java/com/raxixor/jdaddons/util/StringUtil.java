@@ -4,6 +4,9 @@ import com.raxixor.jdaddons.command.Command;
 import com.raxixor.jdaddons.command.CommandDescription;
 import org.apache.commons.text.similarity.LevenshteinDistance;
 
+import java.util.Arrays;
+import java.util.List;
+
 public final class StringUtil {
 
     public static int compareStrings(String a, String b) {

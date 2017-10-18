@@ -1,8 +1,8 @@
 import com.raxixor.jdaddons.entities.ColorType;
 import com.raxixor.jdaddons.util.FormatUtil;
+import com.raxixor.jdaddons.util.StringUtil;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.Region;
-import net.dv8tion.jda.core.utils.SimpleLog;
 import org.junit.Test;
 
 import java.awt.*;
