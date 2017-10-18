@@ -5,6 +5,8 @@ import com.raxixor.jdaddons.util.StringUtil;
 import net.dv8tion.jda.core.entities.Message;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.*;
 
 public class StringTests {
@@ -17,17 +19,17 @@ public class StringTests {
     
     @Test
     public void testSimilarityRatio() {
-        assertEquals(1.00, StringUtil.similarityRatio("test", "test", false), 0.1);
-        assertEquals(1.00, StringUtil.similarityRatio("test", "test"), 0.1);
-        assertEquals(0.5, StringUtil.similarityRatio("aa", "ab"), 0.1);
-        assertEquals(0.125, StringUtil.similarityRatio("aaaaaaaa", "abbbbbbb"), 0.1);
+        assertEquals(BigDecimal.valueOf(1.0), StringUtil.similarityRatio("test", "test", false));
+        assertEquals(BigDecimal.valueOf(1.0), StringUtil.similarityRatio("test", "test"));
+        assertEquals(BigDecimal.valueOf(0.5), StringUtil.similarityRatio("aa", "ab"));
+        assertEquals(BigDecimal.valueOf(0.125), StringUtil.similarityRatio("aaaaaaaa", "abbbbbbb"));
         
-        assertEquals(100.0, StringUtil.similarityRatio("test", "test", true), 0.1);
-        assertEquals(50.0, StringUtil.similarityRatio("test", "tebb", true), 0.1);
+        assertEquals(BigDecimal.valueOf(100.0), StringUtil.similarityRatio("test", "test", true));
+        assertEquals(BigDecimal.valueOf(50.0), StringUtil.similarityRatio("test", "tebb", true));
         
         Command test = new testCommand();
-        assertEquals(100.0, StringUtil.similarityRatio(test, test, true), 0.1);
-        assertEquals(100.0, StringUtil.similarityRatio("test", test, true), 0.1);
+        assertEquals(BigDecimal.valueOf(100.0), StringUtil.similarityRatio(test, test, true));
+        assertEquals(BigDecimal.valueOf(100.0), StringUtil.similarityRatio("test", test, true));
     }
     
     @CommandDescription(name = "test", triggers = "test", attributes =

@@ -4,6 +4,7 @@ import com.raxixor.jdaddons.command.Command;
 import com.raxixor.jdaddons.command.CommandDescription;
 import org.apache.commons.text.similarity.LevenshteinDistance;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public final class StringUtil {
         if (a.length() < b.length()) {
             longer = b; shorter = a;
         }
-        
+    
         int longerLength = longer.length();
         if (longerLength == 0) return mult ? 100.0 : 1.0;
         double calcRatio = (longerLength - compareStrings(longer, shorter)) / (double) longerLength;
@@ -53,5 +54,29 @@ public final class StringUtil {
                 return str.replaceFirst(tr, "").trim();
         }
         return str;
+    }
+    
+    public static BigDecimal similarityRatioBD(String a, String b, boolean mult) {
+        return BigDecimal.valueOf(similarityRatio(a, b, mult));
+    }
+    
+    public static BigDecimal similarityRatioBD(String a, String b) {
+        return BigDecimal.valueOf(similarityRatio(a, b));
+    }
+    
+    public static BigDecimal similarityRatioBD(String a, Command cmd, boolean mult) {
+        return BigDecimal.valueOf(similarityRatio(a, cmd, mult));
+    }
+    
+    public static BigDecimal similarityRatioBD(String a, Command cmd) {
+        return BigDecimal.valueOf(similarityRatio(a, cmd));
+    }
+    
+    public static BigDecimal similarityRatioBD(Command a, Command b, boolean mult) {
+        return BigDecimal.valueOf(similarityRatio(a, b, mult));
+    }
+    
+    public static BigDecimal similarityRatioBD(Command a, Command b) {
+        return BigDecimal.valueOf(similarityRatio(a, b));
     }
 }

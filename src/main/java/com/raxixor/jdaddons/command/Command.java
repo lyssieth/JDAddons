@@ -6,6 +6,7 @@ import com.sun.istack.internal.NotNull;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
+import net.dv8tion.jda.core.requests.RestAction;
 import net.dv8tion.jda.core.utils.SimpleLog;
 
 import java.awt.*;
@@ -39,68 +40,34 @@ public interface Command {
                .anyMatch(ca -> ca.key().equals(key));
     }
     
-    default void reply(@NotNull Message trig, String msg) {
-        trig.getChannel().sendTyping().queue(v ->
-                trig.getChannel().sendMessage(msg).queue());
-    }
-    
-    default void reply(@NotNull Message trig, String msg, EmoteLevel e) {
-        e = e != null ? e : EmoteLevel.INFO;
-        reply(trig, String.format("%s | %s", e, msg));
-    }
-    
-    default void reply(@NotNull Message trig, MessageEmbed embed) {
-        trig.getChannel().sendTyping().queue(v ->
-                trig.getChannel().sendMessage(embed).queue());
-    }
-    
-    default void reply(@NotNull MessageChannel chan, String msg) {
-        chan.sendTyping().queue(v -> chan.sendMessage(msg).queue());
-    }
-    
-    default void reply(@NotNull MessageChannel chan, String msg, EmoteLevel e) {
-        e = e != null ? e : EmoteLevel.INFO;
-        reply(chan, String.format("%s | %s", e, msg));
-    }
-    
-    default void reply(@NotNull MessageChannel chan, MessageEmbed embed) {
-        chan.sendTyping().queue(v -> chan.sendMessage(embed).queue());
-    }
-    
-    default Message replyReturn(@NotNull Message trig, String msg)
-            throws RateLimitedException {
+    default RestAction<Message> reply(@NotNull Message trig, String msg) {
         trig.getChannel().sendTyping().queue();
-        return trig.getChannel().sendMessage(msg).complete(true);
+        return trig.getChannel().sendMessage(msg);
     }
     
-    default Message replyReturn(@NotNull Message trig, String msg, EmoteLevel e)
-            throws RateLimitedException {
+    default RestAction<Message> reply(@NotNull Message trig, String msg, EmoteLevel e) {
         e = e != null ? e : EmoteLevel.INFO;
-        return replyReturn(trig, String.format("%s | %s", e, msg));
+        return reply(trig, String.format("%s | %s", e, msg));
     }
     
-    default Message replyReturn(@NotNull Message trig, MessageEmbed embed)
-            throws RateLimitedException {
+    default RestAction<Message> reply(@NotNull Message trig, MessageEmbed embed) {
         trig.getChannel().sendTyping().queue();
-        return trig.getChannel().sendMessage(embed).complete(true);
+        return trig.getChannel().sendMessage(embed);
     }
     
-    default Message replyReturn(@NotNull MessageChannel chan, String msg)
-            throws RateLimitedException {
+    default RestAction<Message> reply(@NotNull MessageChannel chan, String msg) {
         chan.sendTyping().queue();
-        return chan.sendMessage(msg).complete(true);
+        return chan.sendMessage(msg);
     }
     
-    default Message replyReturn(@NotNull MessageChannel chan, String msg, EmoteLevel e)
-            throws RateLimitedException {
+    default RestAction<Message> reply(@NotNull MessageChannel chan, String msg, EmoteLevel e) {
         e = e != null ? e : EmoteLevel.INFO;
-        return replyReturn(chan, String.format("%s | %s", e, msg));
+        return reply(chan, String.format("%s | %s", e, msg));
     }
     
-    default Message replyReturn(@NotNull MessageChannel chan, MessageEmbed embed)
-            throws RateLimitedException {
+    default RestAction<Message> reply(@NotNull MessageChannel chan, MessageEmbed embed) {
         chan.sendTyping().queue();
-        return chan.sendMessage(embed).complete(true);
+        return chan.sendMessage(embed);
     }
     
     default EmbedBuilder getBaseEmbed(@NotNull Color color, String footer) {
