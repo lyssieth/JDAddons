@@ -1,5 +1,7 @@
 package com.raxixor.jdaddons.util;
 
+import com.raxixor.jdaddons.command.Command;
+import com.raxixor.jdaddons.command.CommandDescription;
 import com.raxixor.jdaddons.entities.ColorType;
 import com.raxixor.jdaddons.entities.Wildcard;
 import net.dv8tion.jda.client.entities.Group;
@@ -10,6 +12,7 @@ import org.apache.commons.text.StrSubstitutor;
 
 import java.awt.*;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -206,5 +209,36 @@ public final class FormatUtil {
     
     public static String formatChannel(MessageChannel chan) {
         return formatChannel(chan, false);
+    }
+    
+    public static String formatHelp(Command cmd, String prefix) {
+        
+        Function<ArrayList<String>, String> gtl = s -> {
+            StringBuilder sb = new StringBuilder();
+            for (String str : s) {
+                sb.append(str).append(", ");
+            }
+            return sb.substring(0, sb.length() - 2);
+        };
+        
+        CommandDescription desc = cmd.getDescription();
+        StringBuilder sb = new StringBuilder();
+        sb.append("` ").append(prefix).append(cmd.getName()).append(" {").append(desc.args()).append("} ");
+        String[] trigs = desc.triggers();
+        ArrayList<String> lst = new ArrayList<>();
+        
+        for (String trig : trigs) {
+            if (trig.equalsIgnoreCase(cmd.getName()))
+                continue;
+            lst.add(trig);
+        }
+        
+        if (!lst.isEmpty()) {
+            sb.append("[").append(gtl.apply(lst)).append("] ");
+        }
+        
+        sb.append(cmd.getAttributeValueFromKey("description"));
+        sb.append(" `");
+        return sb.toString();
     }
 }
