@@ -26,7 +26,7 @@ public class ExampleMessageListener extends ListenerAdapter {
         
         if (handler.isCommand(cmd)) {
             // If the found command is in fact a command.
-            cmd.execute(event.getMessage(), content.replaceFirst(first.trim(), "").trim()); // Execute
+            handler.execute(cmd, event.getMessage(), content.replaceFirst(first.trim(), "").trim()); // Execute
         }
     }
 }
