@@ -83,6 +83,9 @@ public class CommandHandler {
                 "lower than the required argument count (${req}).";
         Map<String, String> val = new HashMap<>();
         if (cd == null) return;
+        
+        if (!cd.respondToBots() && msg.getAuthor().isBot()) return;
+        
         args = args.trim();
         List<String> argsList = Arrays.asList(args.split("\\s+"));
         if (cd.args() > argsList.size()) {
@@ -113,6 +116,7 @@ public class CommandHandler {
     }
     
     public boolean isCommand(Command cmd) {
-        return cmd.getDescription() != null && cmd.hasAttribute("description");
+        CommandDescription desc = cmd.getDescription();
+        return (desc != null) && (cmd.hasAttribute("description"));
     }
 }

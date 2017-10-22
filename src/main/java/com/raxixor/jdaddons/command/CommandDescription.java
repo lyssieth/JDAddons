@@ -14,5 +14,7 @@ public @interface CommandDescription {
     
     int args() default 0;
     
+    boolean respondToBots() default false;
+    
     CommandAttribute[] attributes() default {};
 }
