@@ -84,9 +84,10 @@ public class CommandHandler {
         Map<String, String> val = new HashMap<>();
         if (cd == null) return;
         args = args.trim();
-        if (cd.args() > args.split("\\s+").length) {
+        List<String> argsList = Arrays.asList(args.split("\\s+"));
+        if (cd.args() > argsList.size()) {
             val.put("cmd", cmd.getName());
-            val.put("sup", args.split("\\s+").length + "");
+            val.put("sup", argsList.size() + "");
             val.put("req", cd.args() + "");
             StrSubstitutor sub = new StrSubstitutor(val);
             msg.getChannel().sendMessageFormat("%s | %s",
@@ -95,7 +96,7 @@ public class CommandHandler {
             try {
                 log.info(String.format("{%s %s} Executing %s.", FormatUtil.formatUser(msg.getAuthor()),
                         FormatUtil.formatChannel(msg.getChannel()), cmd.getName()));
-                cmd.execute(msg, args);
+                cmd.execute(msg, argsList);
             } catch (Exception e) {
                 log.warn(String.format("{%s %s} Could not execute %s.", FormatUtil.formatUser(msg.getAuthor()),
                         FormatUtil.formatChannel(msg.getChannel()), cmd.getName()));

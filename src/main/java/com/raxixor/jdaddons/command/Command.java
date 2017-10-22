@@ -11,10 +11,11 @@ import net.dv8tion.jda.core.utils.SimpleLog;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.List;
 
 public interface Command {
     
-    void execute(Message trig, String s);
+    void execute(Message trig, List<String> args);
     
     default CommandDescription getDescription() {
         return getClass()
