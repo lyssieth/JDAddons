@@ -17,4 +17,6 @@ public @interface CommandDescription {
     boolean respondToBots() default false;
     
     CommandAttribute[] attributes() default {};
+    
+    PermissionLevel level() default PermissionLevel.USER;
 }

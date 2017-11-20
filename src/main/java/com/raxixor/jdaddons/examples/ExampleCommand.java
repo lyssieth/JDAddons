@@ -9,7 +9,7 @@ import java.util.List;
 
 @CommandDescription(name = "example", triggers = { "example", "ex"}, attributes =
 @CommandAttribute(key = "description", value = "Example Description"))
-public class ExampleCommand implements Command {
+public class ExampleCommand extends Command {
     
     @Override
     public void execute(Message trig, List<String> s) {

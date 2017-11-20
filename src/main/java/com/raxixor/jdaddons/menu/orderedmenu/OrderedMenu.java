@@ -108,10 +108,10 @@ public class OrderedMenu extends Menu {
             m.delete().queue();
             if (e instanceof MessageReactionAddEvent) {
                 MessageReactionAddEvent event = (MessageReactionAddEvent) e;
-                if (event.getReaction().getEmote().getName().equals(CANCEL))
+                if (event.getReactionEmote().getName().equals(CANCEL))
                     cancel.run();
                 else
-                    action.accept(getNumber(event.getReaction().getEmote().getName()));
+                    action.accept(getNumber(event.getReactionEmote().getName()));
             } else if (e instanceof MessageReceivedEvent) {
                 MessageReceivedEvent event = (MessageReceivedEvent) e;
                 int num = getMessageNumber(event.getMessage().getRawContent());
@@ -126,10 +126,10 @@ public class OrderedMenu extends Menu {
     private void waitReactionOnly(Message m) {
         waiter.waitForEvent(MessageReactionAddEvent.class, e -> isValidReaction(m, e), e -> {
             m.delete().queue();
-            if (e.getReaction().getEmote().getName().equals(CANCEL))
+            if (e.getReactionEmote().getName().equals(CANCEL))
                 cancel.run();
             else
-                action.accept(getNumber(e.getReaction().getEmote().getName()));
+                action.accept(getNumber(e.getReactionEmote().getName()));
         }, timeout, unit, cancel);
     }
     

@@ -84,13 +84,13 @@ public class Slideshow extends Menu {
     
     private void pagination(Message message, int pageNum) {
         waiter.waitForEvent(MessageReactionAddEvent.class, (MessageReactionAddEvent event) -> event.getMessageId().equals(message.getId()) &&
-                (LEFT.equals(event.getReaction().getEmote().getName()) ||
-                        STOP.equals(event.getReaction().getEmote().getName()) ||
-                        RIGHT.equals(event.getReaction().getEmote().getName())) &&
+                (LEFT.equals(event.getReactionEmote().getName()) ||
+                        STOP.equals(event.getReactionEmote().getName()) ||
+                        RIGHT.equals(event.getReactionEmote().getName())) &&
                 isValidUser(event),
                 event -> {
             int newPageNum = pageNum;
-            switch(event.getReaction().getEmote().getName()) {
+            switch(event.getReactionEmote().getName()) {
                 case LEFT: if (newPageNum > 1) newPageNum--; break;
                 case RIGHT: if (newPageNum < urls.size()) newPageNum++; break;
                 case STOP: finalAction.accept(message); return;

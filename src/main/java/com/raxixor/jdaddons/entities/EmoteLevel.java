@@ -2,32 +2,30 @@ package com.raxixor.jdaddons.entities;
 
 public enum EmoteLevel {
     
-    INFO(-1),
-    SUCCESS(0),
-    WARNING(1),
-    ERROR(2),
-    FATAL(3);
+    CONFUSED(-2, "\uD83D\uDE15"),
+    INFO(-1, "ℹ"),
+    SUCCESS(0, "☑"),
+    WARNING(1, "⚠"),
+    ERROR(2, "❌"),
+    FATAL(3, "☠");
     
     private final int value;
-    EmoteLevel(int value) {
+    private final String emote;
+    EmoteLevel(int value, String emote) {
         this.value = value;
+        this.emote = emote;
+    }
+    
+    public int getValue() {
+        return value;
+    }
+    
+    public String getEmote() {
+        return emote;
     }
     
     @Override
     public String toString() {
-        switch(this.value) {
-            case -1:
-                return "ℹ"; // INFO
-            case 0:
-                return "☑"; // SUCCESS
-            case 1:
-                return "⚠"; // WARNING
-            case 2:
-                return "❌"; // ERROR
-            case 3:
-                return "☠"; // FATAL
-            default:
-                return "ℹ"; // INFO
-        }
+        return emote;
     }
 }

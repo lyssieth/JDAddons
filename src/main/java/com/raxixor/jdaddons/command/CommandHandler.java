@@ -3,15 +3,16 @@ package com.raxixor.jdaddons.command;
 import com.raxixor.jdaddons.entities.EmoteLevel;
 import com.raxixor.jdaddons.util.FormatUtil;
 import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.utils.SimpleLog;
+import net.dv8tion.jda.core.utils.JDALogger;
 import org.apache.commons.text.StrSubstitutor;
 import org.apache.commons.text.similarity.LevenshteinDistance;
+import org.slf4j.Logger;
 
 import java.util.*;
 
 public class CommandHandler {
     
-    private final SimpleLog log = SimpleLog.getLog("CommandHandler");
+    private final Logger log = JDALogger.getLog("CommandHandler");
     
     private final Set<Command> commands = new HashSet<>();
     
@@ -97,11 +98,11 @@ public class CommandHandler {
                     EmoteLevel.ERROR, sub.replace(NOT_ENOUGH_ARGS)).queue();
         } else {
             try {
-                log.info(String.format("{%s %s} Executing %s.", FormatUtil.formatUser(msg.getAuthor()),
+                log.info(String.format("{%s | %s} Executing %s.", FormatUtil.formatUser(msg.getAuthor()),
                         FormatUtil.formatChannel(msg.getChannel()), cmd.getName()));
                 cmd.execute(msg, argsList);
             } catch (Exception e) {
-                log.warn(String.format("{%s %s} Could not execute %s.", FormatUtil.formatUser(msg.getAuthor()),
+                log.warn(String.format("{%s | %s} Could not execute %s.", FormatUtil.formatUser(msg.getAuthor()),
                         FormatUtil.formatChannel(msg.getChannel()), cmd.getName()));
                 throw new ExecutionException(e);
             }

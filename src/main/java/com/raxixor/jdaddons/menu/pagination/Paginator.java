@@ -92,12 +92,12 @@ public class Paginator extends Menu {
         waiter.waitForEvent(MessageReactionAddEvent.class, (MessageReactionAddEvent event) -> {
             if (!event.getMessageId().equals(message.getId()))
                 return false;
-            return (LEFT.equals(event.getReaction().getEmote().getName())
-                    || STOP.equals(event.getReaction().getEmote().getName())
-                    || RIGHT.equals(event.getReaction().getEmote().getName())) && isValidUser(event);
+            return (LEFT.equals(event.getReactionEmote().getName())
+                    || STOP.equals(event.getReactionEmote().getName())
+                    || RIGHT.equals(event.getReactionEmote().getName())) && isValidUser(event);
         }, event -> {
             int newPageNum = pageNum;
-            switch (event.getReaction().getEmote().getName()) {
+            switch (event.getReactionEmote().getName()) {
                 case LEFT:  if (newPageNum > 1) newPageNum--; break;
                 case RIGHT: if (newPageNum < pages) newPageNum++; break;
                 case STOP: finalAction.accept(message); return;

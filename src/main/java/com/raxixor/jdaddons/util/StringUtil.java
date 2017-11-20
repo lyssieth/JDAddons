@@ -5,8 +5,6 @@ import com.raxixor.jdaddons.command.CommandDescription;
 import org.apache.commons.text.similarity.LevenshteinDistance;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
 
 public final class StringUtil {
 
