@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'maven'
+}
+
+group 'com.github.raxixor'
+version '1.1'
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+repositories {
+    jcenter()
+    maven {
+        url 'https://jitpack.io'
+        credentials { username jitpackAuthToken }
+    }
+    mavenCentral()
+}
+
+dependencies {
+    compile 'net.dv8tion:JDA:+'
+    compile 'org.slf4j:slf4j-simple:+'
+    compile 'org.apache.httpcomponents:httpcore:+'
+    compile 'org.apache.httpcomponents:httpclient:+'
+    compile 'com.google.code.gson:gson:+'
+    compile 'com.google.guava:guava:+'
+    compile 'com.github.raxixor:SimpleLog:+'
+    compile group: 'org.apache.commons', name: 'commons-text', version: '1.1'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
