@@ -1,4 +1,4 @@
-package com.raxixor.jdaddons.command.single;
+package com.raxixor.jdaddons.command;
 
 public class ExecutionException extends RuntimeException {
     

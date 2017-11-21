@@ -1,4 +1,4 @@
-package com.raxixor.jdaddons.command.group;
+package com.raxixor.jdaddons.command;
 
 public class GroupExecutionException extends RuntimeException {
     
