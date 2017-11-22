@@ -2,11 +2,11 @@ package com.raxixor.jdaddons.entities;
 
 public enum EmoteLevel {
     CONFUSED(-2, "\uD83D\uDE15"),
-    INFO(-1, "ℹ"),
-    SUCCESS(0, "☑"),
-    WARNING(1, "⚠"),
-    ERROR(2, "❌"),
-    FATAL(3, "☠");
+    INFO(-1, "\u00ED"),
+    SUCCESS(0, "\u2611"),
+    WARNING(1, "\u26A0"),
+    ERROR(2, "\u274C"),
+    FATAL(3, "\u2620");
     
     private final int value;
     private final String emote;
