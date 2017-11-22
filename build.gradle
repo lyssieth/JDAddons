@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.github.raxixor'
-version '1.1'
+version '1.1.2'
 
 idea {
     module {
@@ -38,4 +38,26 @@ dependencies {
     compile 'com.google.guava:guava:+'
     compile 'com.github.raxixor:SimpleLog:+'
     compile group: 'org.apache.commons', name: 'commons-text', version: '1.1'
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'JDAddons',
+                'Implementation-Version': version
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.resources
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }
