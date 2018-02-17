@@ -114,7 +114,7 @@ public class OrderedMenu extends Menu {
                     action.accept(getNumber(event.getReactionEmote().getName()));
             } else if (e instanceof MessageReceivedEvent) {
                 MessageReceivedEvent event = (MessageReceivedEvent) e;
-                int num = getMessageNumber(event.getMessage().getRawContent());
+                int num = getMessageNumber(event.getMessage().getContentRaw());
                 if (num < 0 || num > choices.size())
                     cancel.run();
                 else

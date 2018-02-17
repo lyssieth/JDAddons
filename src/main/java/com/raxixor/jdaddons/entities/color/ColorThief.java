@@ -56,9 +56,8 @@ public class ColorThief {
             default:
                 pixelArray = getPixelsSlow(sourceImage, quality, ignoreWhite);
         }
-        
-        CMap cmap = MMCQ.quantize(pixelArray, colorCount);
-        return cmap;
+    
+        return MMCQ.quantize(pixelArray, colorCount);
     }
     
     private static int[][] getPixelsFast(BufferedImage sourceImage, int quality, boolean ignoreWhite) {

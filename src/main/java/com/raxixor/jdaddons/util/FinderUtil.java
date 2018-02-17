@@ -62,17 +62,18 @@ public final class FinderUtil {
     
     public static List<User> findBannedUsers(String query, Guild guild) {
         AtomicReference<List<User>> ret = new AtomicReference<>(null);
-        guild.getBans().queue(bans -> {
+        guild.getBanList().queue(bans -> {
+        	List<User> banUsers = bans.stream().map(Guild.Ban:: getUser).collect(Collectors.toList());
             Matcher userMention = USER_MENTION.matcher(query);
             Matcher fullRefMatch = FULL_USER_REF.matcher(query);
             if (userMention.matches()) {
                 String id = userMention.group(1);
                 User user = guild.getJDA().getUserById(id);
-                if (user != null && bans.contains(user)) {
+                if (user != null && banUsers.contains(user)) {
                     ret.set(Collections.singletonList(user));
                     return;
                 }
-                for (User u : bans)
+                for (User u : banUsers)
                     if (u.getId().equalsIgnoreCase(id)) {
                         ret.set(Collections.singletonList(u));
                         return;
@@ -86,7 +87,7 @@ public final class FinderUtil {
                 if (!users.isEmpty()) {
                     List<User> toRet = new ArrayList<>();
                     for (User u : users)
-                        if (bans.contains(u))
+                        if (banUsers.contains(u))
                             toRet.add(u);
                     
                     if (!toRet.isEmpty()) {
@@ -96,11 +97,11 @@ public final class FinderUtil {
                 }
             } else if (DISCORD_ID.matcher(query).matches()) {
                 User user = guild.getJDA().getUserById(query);
-                if (user != null && bans.contains(user)) {
+                if (user != null && banUsers.contains(user)) {
                     ret.set(Collections.singletonList(user));
                     return;
                 }
-                for (User u : bans)
+                for (User u : banUsers)
                     if (u.getId().equalsIgnoreCase(query)) {
                         ret.set(Collections.singletonList(user));
                         return;
@@ -113,7 +114,7 @@ public final class FinderUtil {
             ArrayList<User> contains = new ArrayList<>();
             
             String lowerQuery = query.toLowerCase();
-            for (User u : bans) {
+            for (User u : banUsers) {
                 if (u.getName().equals(query)) exact.add(u);
                 else if (exact.isEmpty() && u.getName().equalsIgnoreCase(query)) wrongCase.add(u);
                 else if (wrongCase.isEmpty() && u.getName().toLowerCase().startsWith(lowerQuery)) startsWith.add(u);

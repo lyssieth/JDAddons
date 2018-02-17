@@ -384,7 +384,6 @@ public class CommandHandler {
     }
     
     private void replyError(MessageChannel location, String message) {
-        location.sendMessageFormat("%s | %s", EmoteLevel.ERROR,
-                message).queue();
+        location.sendMessageFormat("%s | %s", EmoteLevel.ERROR, message).queue();
     }
 }

@@ -9,7 +9,7 @@ import java.util.*;
 
 public class ShardManager {
     
-    private HashMap<Integer, JDA> shards;
+    private final HashMap<Integer, JDA> shards;
     private static ShardManager instance;
     
     private ShardManager() {
