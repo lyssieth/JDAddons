@@ -1,9 +1,8 @@
 package com.raxixor.jdaddons.command.single;
 
 import com.raxixor.jdaddons.entities.EmoteLevel;
-import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.core.requests.RestAction;
-import net.dv8tion.jda.core.requests.restaction.MessageAction;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.requests.restaction.MessageAction;
 
 import java.util.Arrays;
 import java.util.List;

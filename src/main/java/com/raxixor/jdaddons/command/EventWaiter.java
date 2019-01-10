@@ -1,9 +1,9 @@
 package com.raxixor.jdaddons.command;
 
-import net.dv8tion.jda.core.events.Event;
-import net.dv8tion.jda.core.events.ShutdownEvent;
-import net.dv8tion.jda.core.hooks.EventListener;
-import net.dv8tion.jda.core.hooks.SubscribeEvent;
+import net.dv8tion.jda.api.events.Event;
+import net.dv8tion.jda.api.events.ShutdownEvent;
+import net.dv8tion.jda.api.hooks.EventListener;
+import net.dv8tion.jda.api.hooks.SubscribeEvent;
 
 import java.util.*;
 import java.util.concurrent.*;

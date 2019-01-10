@@ -1,6 +1,6 @@
 package com.raxixor.jdaddons.command.group;
 
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.Message;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,8 +6,8 @@ import com.raxixor.jdaddons.command.single.CommandDescription;
 import com.raxixor.jdaddons.entities.EmoteLevel;
 import com.raxixor.jdaddons.util.FormatUtil;
 import com.raxixor.simplelog.SimpleLog;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import org.apache.commons.text.StrSubstitutor;
 import org.apache.commons.text.similarity.LevenshteinDistance;
 

@@ -1,9 +1,9 @@
 package com.raxixor.jdaddons.util;
 
-import net.dv8tion.jda.client.entities.Group;
-import net.dv8tion.jda.core.OnlineStatus;
-import net.dv8tion.jda.core.Region;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.Region;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Invite.Group;
 import org.apache.commons.text.StrSubstitutor;
 
 import java.awt.*;
