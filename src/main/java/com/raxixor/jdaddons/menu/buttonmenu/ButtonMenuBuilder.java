@@ -1,9 +1,9 @@
 package com.raxixor.jdaddons.menu.buttonmenu;
 
 import com.raxixor.jdaddons.menu.MenuBuilder;
-import net.dv8tion.jda.core.entities.Emote;
-import net.dv8tion.jda.core.entities.ISnowflake;
-import net.dv8tion.jda.core.entities.MessageReaction.ReactionEmote;
+import net.dv8tion.jda.api.entities.Emote;
+import net.dv8tion.jda.api.entities.ISnowflake;
+import net.dv8tion.jda.api.entities.MessageReaction.ReactionEmote;
 
 import java.awt.Color;
 import java.util.Arrays;

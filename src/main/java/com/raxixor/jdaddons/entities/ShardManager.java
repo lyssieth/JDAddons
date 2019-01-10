@@ -1,9 +1,8 @@
 package com.raxixor.jdaddons.entities;
 
 import com.raxixor.jdaddons.util.SafeIdUtil;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.OnlineStatus;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.api.*;
+import net.dv8tion.jda.api.entities.*;
 
 import java.util.*;
 
@@ -146,13 +145,13 @@ public class ShardManager {
     }
     
     /**
-     * Sets the Game of all shards
+     * Sets the Activity of all shards
      *
-     * @param game Game to set it to
+     * @param activity Activity to set it to
      */
-    public void setGame(Game game) {
+    public void setGame(Activity activity) {
         for (JDA shard : shards.values())
-            shard.getPresence().setGame(game);
+            shard.getPresence().setActivity(activity);
     }
     
     /**

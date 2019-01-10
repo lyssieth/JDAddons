@@ -1,8 +1,8 @@
 package com.raxixor.jdaddons.menu;
 
 import com.raxixor.jdaddons.command.EventWaiter;
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.User;
 
 import java.awt.*;
 import java.util.Arrays;

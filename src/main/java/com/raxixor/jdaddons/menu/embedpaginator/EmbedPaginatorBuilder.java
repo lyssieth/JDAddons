@@ -1,8 +1,8 @@
 package com.raxixor.jdaddons.menu.embedpaginator;
 
 import com.raxixor.jdaddons.menu.MenuBuilder;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 
 import java.awt.*;
 import java.util.*;

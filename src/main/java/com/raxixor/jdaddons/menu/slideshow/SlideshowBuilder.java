@@ -1,7 +1,7 @@
 package com.raxixor.jdaddons.menu.slideshow;
 
 import com.raxixor.jdaddons.menu.MenuBuilder;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.Message;
 
 import java.awt.*;
 import java.util.Arrays;
