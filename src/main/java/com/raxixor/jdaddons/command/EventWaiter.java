@@ -1,9 +1,9 @@
 package com.raxixor.jdaddons.command;
 
-import net.dv8tion.jda.api.events.Event;
-import net.dv8tion.jda.api.events.ShutdownEvent;
+import net.dv8tion.jda.api.events.*;
 import net.dv8tion.jda.api.hooks.EventListener;
 import net.dv8tion.jda.api.hooks.SubscribeEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -48,7 +48,7 @@ public class EventWaiter implements EventListener {
     @SuppressWarnings("unchecked")
     @Override
     @SubscribeEvent
-    public void onEvent(Event event) {
+    public void onEvent(@NotNull GenericEvent event) {
         Class c = event.getClass();
         while (c.getSuperclass() != null) {
             if (waitEvents.containsKey(c)) {
@@ -63,7 +63,7 @@ public class EventWaiter implements EventListener {
         }
     }
     
-    private class WaitingEvent<T extends Event> {
+    private class WaitingEvent<T extends GenericEvent> {
         final Predicate<T> condition;
         final Consumer<T> action;
         

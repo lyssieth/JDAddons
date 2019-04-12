@@ -62,7 +62,7 @@ public final class FinderUtil {
     
     public static List<User> findBannedUsers(String query, Guild guild) {
         AtomicReference<List<User>> ret = new AtomicReference<>(null);
-        guild.getBanList().queue(bans -> {
+        guild.retrieveBanList().queue(bans -> {
         	List<User> banUsers = bans.stream().map(Guild.Ban:: getUser).collect(Collectors.toList());
             Matcher userMention = USER_MENTION.matcher(query);
             Matcher fullRefMatch = FULL_USER_REF.matcher(query);
